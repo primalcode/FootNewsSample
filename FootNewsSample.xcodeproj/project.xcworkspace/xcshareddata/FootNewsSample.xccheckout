@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E0CDECB6-4754-4116-B608-830B27046F91</string>
+	<key>IDESourceControlProjectName</key>
+	<string>FootNewsSample</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>BE36844E7527874D025595D6E4205DE61E46D73F</key>
+		<string>github.com:primalcode/FootNewsSample.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>FootNewsSample.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>BE36844E7527874D025595D6E4205DE61E46D73F</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:primalcode/FootNewsSample.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>BE36844E7527874D025595D6E4205DE61E46D73F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BE36844E7527874D025595D6E4205DE61E46D73F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>FootNewsSample</string>
+		</dict>
+	</array>
+</dict>
+</plist>
