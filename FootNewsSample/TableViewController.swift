@@ -16,7 +16,7 @@ class TableViewController : UITableViewController {
   let cellNum = 10
   
   // Api Url
-  let apiUrl = "https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&q=http://www.dailymail.co.uk/sport/football/index.rss&num=10"
+  let apiUrl = "https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&q=http://www.dailymail.co.uk/sport/football/index.rss&num=30"
   
   // Cell Contents
   var cellItems: [(content: String, link: String)] = []
@@ -27,24 +27,31 @@ class TableViewController : UITableViewController {
   // Selected Row
   var selectedRowNum: Int?
   
+  override func scrollViewDidScroll(scrollView: UIScrollView) {
+    // Bottom check
+    if(self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height))
+    {
+      // TODO more content.
+    }
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     // Get JsonData From Api Url
-    makeTableData()
+    makeTableData(0)
   }
   
-  func makeTableData() {
+  func makeTableData(index:Int) {
     self.isInLoad = true
     var url = NSURL(string: self.apiUrl)!
     var task = NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {data, response, error in
       var json = JSON(data: data)
       
-      for var i = 0; i < self.cellNum; i++ {
+      for var i = index; i < self.cellNum; i++ {
         var content = json["responseData"]["feed"]["entries"][i]["content"]
         var link = json["responseData"]["feed"]["entries"][i]["link"]
         self.cellItems += [(content:"\(content)", link:"\(link)")]
-        // NSLog("\(content)")
       }
       
       self.isInLoad = false
