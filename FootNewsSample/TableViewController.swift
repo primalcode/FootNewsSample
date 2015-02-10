@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import Alamofire
 
 class TableViewController : UITableViewController {
   // Section Num
@@ -17,7 +18,7 @@ class TableViewController : UITableViewController {
   let cellNum = 10
   
   // Api Url
-  let apiUrl = "https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&q=http://www.dailymail.co.uk/sport/football/index.rss&num=30"
+  let apiUrl = "https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&q=http://www.dailymail.co.uk/sport/football/index.rss&num=10"
   
   // Cell Contents
   var cellItems: [(content: String, link: String)] = []
@@ -44,24 +45,21 @@ class TableViewController : UITableViewController {
   }
   
   func makeTableData(index:Int) {
+    
     self.isInLoad = true
-    var url = NSURL(string: self.apiUrl)!
-    var task = NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {data, response, error in
-      var json = JSON(data: data)
-      
-      for var i = index; i < self.cellNum; i++ {
-        var content = json["responseData"]["feed"]["entries"][i]["content"]
-        var link = json["responseData"]["feed"]["entries"][i]["link"]
-        self.cellItems += [(content:"\(content)", link:"\(link)")]
-      }
-      
-      self.isInLoad = false
-    })
-    
-    task.resume()
-    
-    while isInLoad {
-      usleep(10)
+    Alamofire.request(.GET, self.apiUrl)
+      .responseJSON {(request, response, data, error) in
+        var json = JSON(data!)
+        
+        println(json)
+        
+        for var i = index; i < self.cellNum; i++ {
+          var content = json["responseData"]["feed"]["entries"][i]["content"]
+          var link = json["responseData"]["feed"]["entries"][i]["link"]
+          println(content)
+          self.cellItems += [(content:"\(content)", link:"\(link)")]
+        }
+        self.tableView.reloadData()
     }
   }
   
@@ -75,9 +73,12 @@ class TableViewController : UITableViewController {
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("tableCell", forIndexPath: indexPath) as UITableViewCell
+
+    if self.cellItems.count > 0 {
+      var info = self.cellItems[indexPath.row]
+      cell.textLabel?.text = info.content
+    }
     
-    var info = self.cellItems[indexPath.row]
-    cell.textLabel?.text = info.content
     return cell
   }
   
