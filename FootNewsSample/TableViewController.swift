@@ -53,9 +53,9 @@ class TableViewController : UITableViewController {
         
         println(json)
         
-        for var i = index; i < self.cellNum; i++ {
-          var content = json["responseData"]["feed"]["entries"][i]["content"]
-          var link = json["responseData"]["feed"]["entries"][i]["link"]
+        for index in 0...self.cellNum {
+          var content = json["responseData"]["feed"]["entries"][index]["content"]
+          var link = json["responseData"]["feed"]["entries"][index]["link"]
           println(content)
           self.cellItems += [(content:"\(content)", link:"\(link)")]
         }
